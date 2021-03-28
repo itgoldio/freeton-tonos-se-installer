@@ -24,7 +24,7 @@ while read -r p ; do
     if [ "" == "`which $p`" ];
     then echo "$p Not Found";
         if [ -n "`which apt`" ];
-        then apt install -y $p ;
+        then apt update && apt install -y $p ;
         elif [ -n "`which yum`" ];
         then yum -y install $p ;
         fi ;
@@ -102,6 +102,8 @@ npx tsc
 cd ../tests
 npm i
 npx tsc
+cd ../tests-node
+npm i
 cd ../../
 ##########################################
 
