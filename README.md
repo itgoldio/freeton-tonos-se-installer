@@ -48,15 +48,26 @@ Using application you can:
 - Change default ports
 - Reset local blockchain to zerostate
 
+## Test local blockchain
+Run local blockchain\
+Tap "Run tests"
+
+![menu2](imgs/menu2.png?raw=true "menu-2")
+
 # Build your own binaries
 
 Ansible playbook contains in [ansible](ansible/) folder:\
+`sudo apt update`\
+`sudo apt install ansible git -y`\
 `git clone https://github.com/itgoldio/freeton-tonos-se-installer.git`\
-`cd ansible`
+`cd freeton-tonos-se-installer/ansible`
 
 To create your own releases, first - change variables in [ansible/vars/deployment.yml](absible/vars/deployment.yml) with needed versions of all components, then fill the linux group [ansible/inventory](ansible/inventory) file - put the IP’s of hosts with supported linux distributions.
 Feel free to change installation scripts and configs templates with your needs, they are located in [ansible/roles/prepare_configs_and_scripts/](ansible/roles/prepare_configs_and_scripts/)
 
 Run the playbook with:\
 `ansible-playbook -i inventory build_tonos-se-binaries.yml`\
+If you run playbook locally, use -c local parameter\
+`ansible-playbook -i inventory build_tonos-se-binaries.yml -c local`
+
 You will get compiled binaries and other filled files in artifacts folder.
