@@ -1,6 +1,6 @@
 # Specify your hosts IP addresses
 [linux]
-127.0.0.1
+127.0.0.1 ansible_connection=local
 # Connection settings
 [all:vars]
 ansible_connection='ssh'
