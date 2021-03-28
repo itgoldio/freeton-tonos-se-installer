@@ -13,8 +13,10 @@ Get support in our telegram channel:
 # Supported OS versions:
 Ubuntu: 20.04\
 Debian: 10\
-CentOS: 8
+CentOS: 8\
+Windows: 10 (need enabled WSL 2 with one of OS above)
 ## Installation
+##### For Windows users: get WSL2 https://docs.microsoft.com/en-us/windows/wsl/install-win10 and install one of supported linuxes from Microsoft Store, open it's terminal (get Windows Terminaa app from Windows store) and move further
 
 1. Download or clone this repository
 
@@ -52,8 +54,8 @@ Ansible playbook contains in [ansible](ansible/) folder:\
 `git clone https://github.com/itgoldio/freeton-tonos-se-installer.git`\
 `cd ansible`
 
-To create your own releases, first - change variables in [vars/deployment.yml](vars/deployment.yml) with needed versions of all components, then fill the linux group [inventory](./inventory) file - put the IP’s of hosts with supported linux distributions.
-Feel free to change installation scripts and configs templates with your needs, they are located in [roles/prepare_configs_and_scripts/](roles/prepare_configs_and_scripts/)
+To create your own releases, first - change variables in [ansible/vars/deployment.yml](absible/vars/deployment.yml) with needed versions of all components, then fill the linux group [ansible/inventory](ansible/inventory) file - put the IP’s of hosts with supported linux distributions.
+Feel free to change installation scripts and configs templates with your needs, they are located in [ansible/roles/prepare_configs_and_scripts/](ansible/roles/prepare_configs_and_scripts/)
 
 Run the playbook with:\
 `ansible-playbook -i inventory build_tonos-se-binaries.yml`\
