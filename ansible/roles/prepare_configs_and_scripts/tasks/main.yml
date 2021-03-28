@@ -1,0 +1,15 @@
+- name: Prepare install.sh script
+  template:
+    src: "install.sh.j2"
+    dest: "artifacts/install.sh"
+
+- name: Copy configs
+  copy:
+    src: "{{ item }}"
+    dest: "artifacts/tonos-se_{{ tonos_se_github_release_tag }}_{{ item }}"
+  loop:
+    - "config.json"
+    - "log_cfg.yml"
+    - "pub-key"
+    - "private-key"
+    - "nginx.conf"

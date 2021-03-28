@@ -1,0 +1,18 @@
+- name: Install tonos-se compile dependencies
+  apt:
+    name:
+      - git
+      - libssl-dev
+      - pkg-config
+      - build-essential
+      - autoconf
+      - automake
+      - m4
+      - cmake
+      - libtool
+      - clang
+      - tar
+      - gpg
+    state: latest
+    update_cache: yes
+    cache_valid_time: 3600

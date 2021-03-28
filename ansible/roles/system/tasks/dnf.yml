@@ -1,0 +1,29 @@
+- name: Install epel-release package in centos
+  dnf: 
+    name: 
+      - epel-release
+    state: latest
+  when: ansible_facts['distribution'] == "CentOS"
+
+- name: Install epel-release package in oracle
+  dnf: 
+    name: 
+      - oracle-epel-release-el8
+    state: latest
+  when: ansible_facts['distribution'] == "OracleLinux"
+
+- name: Install system packages
+  dnf:
+    name:
+      - wget
+      - gnupg
+      - ca-certificates
+      - curl
+      - bind-utils
+      - jq
+    state: latest
+
+- name: Set SELinux in permissive mode until the machine is rebooted
+  command: setenforce 0
+  ignore_errors: true
+  changed_when: false

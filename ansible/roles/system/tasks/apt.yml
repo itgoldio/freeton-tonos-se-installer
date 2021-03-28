@@ -1,0 +1,13 @@
+- name: Install system packages
+  apt:
+    name:
+      - apt-transport-https
+      - wget
+      - gnupg
+      - ca-certificates
+      - curl
+      - jq
+      - acl
+    state: latest
+    update_cache: yes
+    cache_valid_time: 3600

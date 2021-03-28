@@ -1,0 +1,10 @@
+# Specify your hosts IP addresses
+[linux]
+127.0.0.1
+# Connection settings
+[all:vars]
+ansible_connection='ssh'
+ansible_ssh_port='22'
+ansible_user='root'
+ansible_ssh_pass='secretpassword'  # "sshpass" package is required for use "ansible_ssh_pass"
+# ansible_ssh_private_key_file=

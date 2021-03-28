@@ -1,0 +1,10 @@
+# skip folder created by install.sh
+distr/
+arangodb
+ton-client-js
+ton-q-server
+tonos-se/
+log/
+db/
+ansible/artifacts/*
+!ansible/artifacts/.placeholder

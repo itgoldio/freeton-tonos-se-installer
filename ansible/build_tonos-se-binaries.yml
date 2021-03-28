@@ -1,0 +1,18 @@
+---
+
+- hosts: linux
+  become: true
+  become_method: sudo
+  gather_facts: true
+  vars_files:
+    - vars/deployment.yml
+  roles:
+    - system
+    - tonos_se_build
+
+- hosts: localhost
+  connection: local
+  vars_files:
+    - vars/deployment.yml
+  roles:
+    - prepare_configs_and_scripts

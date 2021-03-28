@@ -1,0 +1,49 @@
+---
+
+- name: Create tonos-se dirs
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: u=rwx,g=rx,o=
+  loop:
+    - "{{ tonos_se_artifacts_dir }}"
+    - "{{ tonos_se_src_dir }}"
+
+- name: Include os specific tasks
+  include_tasks: "{{ ansible_pkg_mgr }}.yml"
+
+- name: Download Rust init
+  get_url:
+    url: '{{ rustup_mirror }}/{{ rustup_platform }}/rustup-init'
+    dest: '/usr/local/bin/rustup-init'
+    mode: u=rwx,g=rx,o=
+
+- name: Install Rust
+  command: '/usr/local/bin/rustup-init -y --default-toolchain {{ rustup_default_toolchain }}'
+
+- name: Get tonos-se sources
+  git:
+    repo: "{{ tonos_se_github_repo }}"
+    dest: "{{ tonos_se_src_dir }}/tonos-se"
+    version: "{{ tonos_se_github_release_tag }}"
+
+- name: Build tonos-se
+  block:
+    - name: Update repo deps | tonos-se
+      command: '{{ ansible_env.HOME }}/.cargo/bin/cargo update --manifest-path {{ tonos_se_src_dir }}/tonos-se/ton-node-se/Cargo.toml'
+    - name: Build repo | tonos-se
+      command: '{{ ansible_env.HOME }}/.cargo/bin/cargo build --manifest-path {{ tonos_se_src_dir }}/tonos-se/ton-node-se/Cargo.toml --target-dir {{ tonos_se_src_dir }} --release'
+
+- name: Copy tonos-se artifacts (debian)
+  fetch:
+    src: "{{ tonos_se_src_dir }}/release/ton_node_startup"
+    dest: "artifacts/tonos-se_{{ tonos_se_github_release_tag }}_{{ ansible_distribution | lower}}_{{ ansible_distribution_version }}"
+    flat: yes
+  when: ansible_pkg_mgr == "apt"
+
+- name: Copy tonos-se artifacts (rhel)
+  fetch:
+    src: "{{ tonos_se_src_dir }}/release/ton_node_startup"
+    dest: "artifacts/tonos-se_{{ tonos_se_github_release_tag }}_{{ ansible_distribution | lower}}_{{ ansible_distribution_major_version }}"
+    flat: yes
+  when: ansible_pkg_mgr == "dnf"

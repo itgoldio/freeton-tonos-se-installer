@@ -1,0 +1,8 @@
+- name: Install tonos-se compile dependencies
+  dnf:
+    name:
+      - "@Development tools"
+      - openssl-devel
+      - clang
+      - cmake
+    state: latest
