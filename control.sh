@@ -27,6 +27,7 @@ TONOSSE_CURRENT_PORT=40301
 TONOSSE_DEFAULT_PORT=40301
 TONOSSE_BLOCKCHAIN_DIR="workchains"
 NGINX_CONF="distr/nginx/nginx.conf"
+NGINX_RUNDIR="distr/nginx/"
 
 
 TON_Q_DIR="ton-q-server"
@@ -281,7 +282,7 @@ start_tonose()
     echo "$LOG_INFO_PREFIX Starting tonos-se..."
 
     pkill -9 nginx
-    nginx -c $(pwd)/$NGINX_CONF
+    nginx -c $(pwd)/$NGINX_CONF -p $(pwd)/NGINX_RUNDIR
 
     TONOSSE_DB_IP=$(cat $TONOSSE_DIR/$TONOSSE_CONFIG | jq .document_db.server -r | cut -d ":" -f 1)
     TONOSSE_DB_PORT=$(cat $TONOSSE_DIR/$TONOSSE_CONFIG | jq .document_db.server -r | cut -d ":" -f 2)
