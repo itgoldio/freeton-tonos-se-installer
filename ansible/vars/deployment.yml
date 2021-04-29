@@ -1,11 +1,11 @@
 #production variables
 arangodb_version: "3.7.10"
-ton_q_server_release_tag: "0.35.0"
-ton_client_js_release_tag: "1.11.1"
+ton_q_server_release_tag: "0.38.0"
+ton_client_js_release_tag: "1.14.0"
 
 #tonos-se build variables
 tonos_se_github_repo: "https://github.com/tonlabs/tonos-se.git"
-tonos_se_github_release_tag: "0.25.0"
+tonos_se_github_release_tag: "0.27.1"
 tonos_se_artifacts_dir: "/opt/tonos-se-artifacts"
 tonos_se_src_dir: "/opt/tonos-se-src"
 
