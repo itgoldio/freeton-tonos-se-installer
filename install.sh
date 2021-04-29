@@ -24,9 +24,9 @@ while read -r p ; do
     if [ "" == "`which $p`" ];
     then echo "$p Not Found";
         if [ -n "`which apt`" ];
-        then apt update && apt install -y $p ;
+        then sudo apt update && sudo apt install -y $p ;
         elif [ -n "`which yum`" ];
-        then yum -y install $p ;
+        then sudo yum -y install $p ;
         fi ;
     fi
 done < <(cat << "EOF"
@@ -68,7 +68,8 @@ wget $TONSELOGCONFIG -O $DIR_TONOSSE/log_cfg.yml
 
 ##################Nginx####################
 
-systemctl disable --now nginx
+sudo systemctl disable --now nginx
+sudo setcap CAP_NET_BIND_SERVICE=+eip /usr/sbin/nginx
 mkdir $DIR_DISTR/nginx
 wget $TONSENGINXCONFIG -O $DIR_DISTR/nginx/nginx.conf
 
