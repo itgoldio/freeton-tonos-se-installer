@@ -2,7 +2,7 @@
 
 OS_VERSION=$(grep -oP '(?<=^ID=).+' /etc/os-release | tr -d '"')
 OS_VERSION_ID=$(grep -oP '(?<=^VERSION_ID=).+' /etc/os-release | tr -d '"')
-TONOS_SE_VERSION="0.27.1"
+TONOS_SE_VERSION="0.27.2"
 
 ARANGODBURL="https://download.arangodb.com/arangodb37/Community/Linux/arangodb3-linux-3.7.10.tar.gz"
 
@@ -92,7 +92,7 @@ cd $DIR_TON_Q_SERVER && npm install && cd ..
 
 
 ################TON-CLIENT-JS#############
-git clone --depth=1 --branch 1.14.0 https://github.com/tonlabs/ton-client-js.git $DIR_DISTR/ton-client-js
+git clone --depth=1 --branch 1.14.2 https://github.com/tonlabs/ton-client-js.git $DIR_DISTR/ton-client-js
 ln -s $DIR_DISTR/$DIR_TON_CLIENT_JS $DIR_TON_CLIENT_JS
 cd $DIR_TON_CLIENT_JS
 npm i --save @tonclient/core
