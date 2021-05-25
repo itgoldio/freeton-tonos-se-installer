@@ -2,9 +2,12 @@
 
 OS_VERSION=$(grep -oP '(?<=^ID=).+' /etc/os-release | tr -d '"')
 OS_VERSION_ID=$(grep -oP '(?<=^VERSION_ID=).+' /etc/os-release | tr -d '"')
-TONOS_SE_VERSION="0.28.2"
+TONOS_SE_VERSION="0.28.3"
+ARANGODB_VERSION="3.7.11"
+TON_Q_SERVER_VERSION="0.39.0"
+TON_CLIENT_JS_VERSION="1.16.0"
 
-ARANGODBURL="https://download.arangodb.com/arangodb37/Community/Linux/arangodb3-linux-3.7.10.tar.gz"
+ARANGODBURL="https://download.arangodb.com/arangodb37/Community/Linux/arangodb3-linux-${ARANGODB_VERSION}.tar.gz"
 
 TONSEURL="https://github.com/itgoldio/freeton-tonos-se-installer/releases/download/${TONOS_SE_VERSION}/tonos-se_${TONOS_SE_VERSION}_${OS_VERSION}_${OS_VERSION_ID}"
 TONSECONFIG="https://github.com/itgoldio/freeton-tonos-se-installer/releases/download/${TONOS_SE_VERSION}/tonos-se_${TONOS_SE_VERSION}_config.json"
@@ -84,7 +87,7 @@ export Q_SLOW_QUERIES_HOT=${Q_DATA_MUT}
 export Q_REQUESTS_MODE=rest
 export Q_PORT=4000
 
-git clone --depth=1 --branch 0.39.0 https://github.com/tonlabs/ton-q-server.git $DIR_DISTR/$DIR_TON_Q_SERVER
+git clone --depth=1 --branch ${TON_Q_SERVER_VERSION} https://github.com/tonlabs/ton-q-server.git $DIR_DISTR/$DIR_TON_Q_SERVER
 ln -s $DIR_DISTR/$DIR_TON_Q_SERVER $DIR_TON_Q_SERVER
 cd $DIR_TON_Q_SERVER && npm install && cd ..
 
@@ -92,7 +95,7 @@ cd $DIR_TON_Q_SERVER && npm install && cd ..
 
 
 ################TON-CLIENT-JS#############
-git clone --depth=1 --branch 1.15.0 https://github.com/tonlabs/ton-client-js.git $DIR_DISTR/ton-client-js
+git clone --depth=1 --branch ${TON_CLIENT_JS_VERSION} https://github.com/tonlabs/ton-client-js.git $DIR_DISTR/ton-client-js
 ln -s $DIR_DISTR/$DIR_TON_CLIENT_JS $DIR_TON_CLIENT_JS
 cd $DIR_TON_CLIENT_JS
 npm i --save @tonclient/core
