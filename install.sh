@@ -2,10 +2,10 @@
 
 OS_VERSION=$(grep -oP '(?<=^ID=).+' /etc/os-release | tr -d '"')
 OS_VERSION_ID=$(grep -oP '(?<=^VERSION_ID=).+' /etc/os-release | tr -d '"')
-TONOS_SE_VERSION="0.28.3"
-ARANGODB_VERSION="3.7.11"
-TON_Q_SERVER_VERSION="0.39.0"
-TON_CLIENT_JS_VERSION="1.16.0"
+TONOS_SE_VERSION="0.28.4"
+ARANGODB_VERSION="3.7.12"
+TON_Q_SERVER_VERSION="0.40.0"
+TON_CLIENT_JS_VERSION="1.19.0"
 
 ARANGODBURL="https://download.arangodb.com/arangodb37/Community/Linux/arangodb3-linux-${ARANGODB_VERSION}.tar.gz"
 
