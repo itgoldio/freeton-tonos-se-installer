@@ -13,3 +13,4 @@
     - "pub-key"
     - "private-key"
     - "nginx.conf"
+    - "blockchain.conf.json"

@@ -11,6 +11,7 @@ ARANGODBURL="https://download.arangodb.com/arangodb37/Community/Linux/arangodb3-
 
 TONSEURL="https://github.com/itgoldio/freeton-tonos-se-installer/releases/download/${TONOS_SE_VERSION}/tonos-se_${TONOS_SE_VERSION}_${OS_VERSION}_${OS_VERSION_ID}"
 TONSECONFIG="https://github.com/itgoldio/freeton-tonos-se-installer/releases/download/${TONOS_SE_VERSION}/tonos-se_${TONOS_SE_VERSION}_config.json"
+TONSEBLOCKCHAINCONFIG="https://github.com/itgoldio/freeton-tonos-se-installer/releases/download/${TONOS_SE_VERSION}/tonos-se_${TONOS_SE_VERSION}_blockchain.conf.json"
 TONSEPUBKEY="https://github.com/itgoldio/freeton-tonos-se-installer/releases/download/${TONOS_SE_VERSION}/tonos-se_${TONOS_SE_VERSION}_pub-key"
 TONSEPRVKEY="https://github.com/itgoldio/freeton-tonos-se-installer/releases/download/${TONOS_SE_VERSION}/tonos-se_${TONOS_SE_VERSION}_private-key"
 TONSELOGCONFIG="https://github.com/itgoldio/freeton-tonos-se-installer/releases/download/${TONOS_SE_VERSION}/tonos-se_${TONOS_SE_VERSION}_log_cfg.yml"
@@ -65,6 +66,7 @@ wget $TONSECONFIG  -O $DIR_TONOSSE/config.json
 wget $TONSEPUBKEY  -O $DIR_TONOSSE/pub-key
 wget $TONSEPRVKEY  -O $DIR_TONOSSE/private-key
 wget $TONSELOGCONFIG -O $DIR_TONOSSE/log_cfg.yml
+wget $TONSEBLOCKCHAINCONFIG -O $DIR_TONOSSE/blockchain.conf.json
 
 
 ##########################################

@@ -21,6 +21,7 @@ ARANGODB_SEED_SCRIPT="scripts/seed-arango-db.js"
 TONOSSE_DIR="tonos-se"
 TONOSSE_BIN="ton_node_startup"
 TONOSSE_CONFIG="config.json"
+TONOSSE_BLOCKCHAINCONFIG="blockchain.conf.json"
 TONOSSE_CONFIG_TEMP="config-temp.json"
 TONOSSE_PID_ID=-1
 TONOSSE_CURRENT_PORT=40301
@@ -282,7 +283,7 @@ start_tonose()
     echo "$LOG_INFO_PREFIX Starting tonos-se..."
 
     pkill -9 nginx
-    nginx -c $(pwd)/$NGINX_CONF -p $(pwd)/NGINX_RUNDIR
+    nginx -c $(pwd)/$NGINX_CONF -p $(pwd)/$NGINX_RUNDIR
 
     TONOSSE_DB_IP=$(cat $TONOSSE_DIR/$TONOSSE_CONFIG | jq .document_db.server -r | cut -d ":" -f 1)
     TONOSSE_DB_PORT=$(cat $TONOSSE_DIR/$TONOSSE_CONFIG | jq .document_db.server -r | cut -d ":" -f 2)
@@ -297,7 +298,7 @@ start_tonose()
     rm $TONOSSE_DIR/$TONOSSE_CONFIG
     mv $TONOSSE_DIR/$TONOSSE_CONFIG_TEMP $TONOSSE_DIR/$TONOSSE_CONFIG
 
-    TONOSSE_RUN_COMMAND="./$TONOSSE_BIN --config $TONOSSE_CONFIG"
+    TONOSSE_RUN_COMMAND="./$TONOSSE_BIN --config $TONOSSE_CONFIG --blockchain-config $TONOSSE_BLOCKCHAINCONFIG"
     cd $TONOSSE_DIR
     $TONOSSE_RUN_COMMAND > /dev/null &
     cd - > /dev/null
