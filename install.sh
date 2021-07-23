@@ -2,15 +2,16 @@
 
 OS_VERSION=$(grep -oP '(?<=^ID=).+' /etc/os-release | tr -d '"')
 OS_VERSION_ID=$(grep -oP '(?<=^VERSION_ID=).+' /etc/os-release | tr -d '"')
-TONOS_SE_VERSION="0.28.4"
-ARANGODB_VERSION="3.7.12"
-TON_Q_SERVER_VERSION="0.40.0"
-TON_CLIENT_JS_VERSION="1.19.0"
+TONOS_SE_VERSION="0.28.5"
+ARANGODB_VERSION="3.7.13"
+TON_Q_SERVER_VERSION="0.41.0"
+TON_CLIENT_JS_VERSION="1.20.0"
 
 ARANGODBURL="https://download.arangodb.com/arangodb37/Community/Linux/arangodb3-linux-${ARANGODB_VERSION}.tar.gz"
 
 TONSEURL="https://github.com/itgoldio/freeton-tonos-se-installer/releases/download/${TONOS_SE_VERSION}/tonos-se_${TONOS_SE_VERSION}_${OS_VERSION}_${OS_VERSION_ID}"
 TONSECONFIG="https://github.com/itgoldio/freeton-tonos-se-installer/releases/download/${TONOS_SE_VERSION}/tonos-se_${TONOS_SE_VERSION}_config.json"
+TONSEBLOCKCHAINCONFIG="https://github.com/itgoldio/freeton-tonos-se-installer/releases/download/${TONOS_SE_VERSION}/tonos-se_${TONOS_SE_VERSION}_blockchain.conf.json"
 TONSEPUBKEY="https://github.com/itgoldio/freeton-tonos-se-installer/releases/download/${TONOS_SE_VERSION}/tonos-se_${TONOS_SE_VERSION}_pub-key"
 TONSEPRVKEY="https://github.com/itgoldio/freeton-tonos-se-installer/releases/download/${TONOS_SE_VERSION}/tonos-se_${TONOS_SE_VERSION}_private-key"
 TONSELOGCONFIG="https://github.com/itgoldio/freeton-tonos-se-installer/releases/download/${TONOS_SE_VERSION}/tonos-se_${TONOS_SE_VERSION}_log_cfg.yml"
@@ -65,6 +66,7 @@ wget $TONSECONFIG  -O $DIR_TONOSSE/config.json
 wget $TONSEPUBKEY  -O $DIR_TONOSSE/pub-key
 wget $TONSEPRVKEY  -O $DIR_TONOSSE/private-key
 wget $TONSELOGCONFIG -O $DIR_TONOSSE/log_cfg.yml
+wget $TONSEBLOCKCHAINCONFIG -O $DIR_TONOSSE/blockchain.conf.json
 
 
 ##########################################
