@@ -91,7 +91,7 @@ export Q_PORT=4000
 
 git clone --depth=1 --branch ${TON_Q_SERVER_VERSION} https://github.com/tonlabs/ton-q-server.git $DIR_DISTR/$DIR_TON_Q_SERVER
 ln -s $DIR_DISTR/$DIR_TON_Q_SERVER $DIR_TON_Q_SERVER
-cd $DIR_TON_Q_SERVER && npm install && cd ..
+cd $DIR_TON_Q_SERVER && npm update && npm install && npm audit fix && cd ..
 
 ##########################################
 

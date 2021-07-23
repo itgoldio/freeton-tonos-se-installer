@@ -1,6 +1,6 @@
 #production variables
 arangodb_version: "3.7.13"
-ton_q_server_release_tag: "0.41.0"
+ton_q_server_release_tag: "0.40.0"
 ton_client_js_release_tag: "1.20.0"
 
 #tonos-se build variables

@@ -4,7 +4,7 @@ OS_VERSION=$(grep -oP '(?<=^ID=).+' /etc/os-release | tr -d '"')
 OS_VERSION_ID=$(grep -oP '(?<=^VERSION_ID=).+' /etc/os-release | tr -d '"')
 TONOS_SE_VERSION="0.28.5"
 ARANGODB_VERSION="3.7.13"
-TON_Q_SERVER_VERSION="0.41.0"
+TON_Q_SERVER_VERSION="0.40.0"
 TON_CLIENT_JS_VERSION="1.20.0"
 
 ARANGODBURL="https://download.arangodb.com/arangodb37/Community/Linux/arangodb3-linux-${ARANGODB_VERSION}.tar.gz"
@@ -91,7 +91,7 @@ export Q_PORT=4000
 
 git clone --depth=1 --branch ${TON_Q_SERVER_VERSION} https://github.com/tonlabs/ton-q-server.git $DIR_DISTR/$DIR_TON_Q_SERVER
 ln -s $DIR_DISTR/$DIR_TON_Q_SERVER $DIR_TON_Q_SERVER
-cd $DIR_TON_Q_SERVER && npm install && cd ..
+cd $DIR_TON_Q_SERVER && npm update && npm install && npm audit fix && cd ..
 
 ##########################################
 
