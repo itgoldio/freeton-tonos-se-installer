@@ -86,7 +86,11 @@ mkdir -p $DIR_DISTR/nginx/static
 wget $TONSENGINXCONFIG -O $DIR_DISTR/nginx/nginx.conf
 chmod o+x ~
 
-git clone --depth=1 --filter=blob:none --no-checkout https://github.com/tonlabs/tonos-se.git $DIR_DISTR/nginx/static
+if [ `git --version | awk '{split($3,a,"."); print a[2]}'` -ge 27 ] ; then
+    git clone --depth=1 --filter=blob:none --sparse https://github.com/tonlabs/tonos-se.git $DIR_DISTR/nginx/static
+else
+    git clone --depth=1 --filter=blob:none --no-checkout https://github.com/tonlabs/tonos-se.git $DIR_DISTR/nginx/static
+fi
 cd $DIR_DISTR/nginx/static
 git sparse-checkout set docker/ton-live
 cd ../../..
