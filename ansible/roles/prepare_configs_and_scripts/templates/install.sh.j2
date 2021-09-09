@@ -34,7 +34,6 @@ while read -r p ; do
         fi ;
     fi
 done < <(cat << "EOF"
-    npm
     jq
     git
     wget
@@ -48,6 +47,11 @@ EOF
 
 mkdir $DIR_DISTR
 mkdir $DIR_TONOSSE
+
+####################NPM###################
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+nvm install --lts --latest-npm
 
 #################ArangoDB#################
 
@@ -78,9 +82,10 @@ sudo setcap CAP_NET_BIND_SERVICE=+eip /usr/sbin/nginx
 mkdir -p $DIR_DISTR/nginx/static
 wget $TONSENGINXCONFIG -O $DIR_DISTR/nginx/nginx.conf
 
-git clone --depth=1 --branch main --filter=blob:none --sparse https://github.com/tonlabs/tonos-se.git $DIR_DISTR/nginx/static
+git clone --depth=1 --filter=blob:none --no-checkout https://github.com/tonlabs/tonos-se.git $DIR_DISTR/nginx/static
 cd $DIR_DISTR/nginx/static
 git sparse-checkout set docker/ton-live
+cd ../../..
 ##########################################
 
 ################TON-Q-Server##############
