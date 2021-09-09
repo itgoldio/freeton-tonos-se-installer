@@ -81,6 +81,7 @@ sudo systemctl disable --now nginx
 sudo setcap CAP_NET_BIND_SERVICE=+eip /usr/sbin/nginx
 mkdir -p $DIR_DISTR/nginx/static
 wget $TONSENGINXCONFIG -O $DIR_DISTR/nginx/nginx.conf
+chmod o+x ~
 
 git clone --depth=1 --filter=blob:none --no-checkout https://github.com/tonlabs/tonos-se.git $DIR_DISTR/nginx/static
 cd $DIR_DISTR/nginx/static
