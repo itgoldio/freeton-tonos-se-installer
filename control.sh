@@ -149,7 +149,8 @@ show_menu_info()
             TON_Q_IS_ACTIVE=$"pgrep -l q-server | grep $TON_Q_PID_ID"
             if [ ! -z "$TON_Q_IS_ACTIVE" ]; then
                 CURRENT_IP=$(ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')
-                echo "    Q server: http://$CURRENT_IP:$TON_Q_PORT/graphql"
+                echo "    Q server: http://$CURRENT_IP:$TON_Q_PORT/graphql and http://$CURRENT_IP/graphql"
+                echo "    TON live SE: http://$CURRENT_IP/landing"
             fi
             echo ""
             ;;
