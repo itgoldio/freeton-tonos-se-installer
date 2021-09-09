@@ -2,10 +2,10 @@
 
 OS_VERSION=$(grep -oP '(?<=^ID=).+' /etc/os-release | tr -d '"')
 OS_VERSION_ID=$(grep -oP '(?<=^VERSION_ID=).+' /etc/os-release | tr -d '"')
-TONOS_SE_VERSION="0.28.6"
-ARANGODB_VERSION="3.7.13"
-TON_Q_SERVER_VERSION="0.40.0"
-TON_CLIENT_JS_VERSION="1.20.1"
+TONOS_SE_VERSION="0.28.7"
+ARANGODB_VERSION="3.7.14"
+TON_Q_SERVER_VERSION="0.42.1"
+TON_CLIENT_JS_VERSION="1.21.4"
 
 ARANGODBURL="https://download.arangodb.com/arangodb37/Community/Linux/arangodb3-linux-${ARANGODB_VERSION}.tar.gz"
 
@@ -75,9 +75,12 @@ wget $TONSEBLOCKCHAINCONFIG -O $DIR_TONOSSE/blockchain.conf.json
 
 sudo systemctl disable --now nginx
 sudo setcap CAP_NET_BIND_SERVICE=+eip /usr/sbin/nginx
-mkdir $DIR_DISTR/nginx
+mkdir -p $DIR_DISTR/nginx/static
 wget $TONSENGINXCONFIG -O $DIR_DISTR/nginx/nginx.conf
 
+git clone --depth=1 --branch main --filter=blob:none --sparse https://github.com/tonlabs/tonos-se.git $DIR_DISTR/nginx/static
+cd $DIR_DISTR/nginx/static
+git sparse-checkout set docker/ton-live
 ##########################################
 
 ################TON-Q-Server##############
@@ -88,10 +91,12 @@ export Q_SLOW_QUERIES_MUT=${Q_DATA_MUT}
 export Q_SLOW_QUERIES_HOT=${Q_DATA_MUT}
 export Q_REQUESTS_MODE=rest
 export Q_PORT=4000
+export Q_REQUESTS_SERVER=http://127.0.0.1
+export Q_HOST=127.0.0.1
 
 git clone --depth=1 --branch ${TON_Q_SERVER_VERSION} https://github.com/tonlabs/ton-q-server.git $DIR_DISTR/$DIR_TON_Q_SERVER
 ln -s $DIR_DISTR/$DIR_TON_Q_SERVER $DIR_TON_Q_SERVER
-cd $DIR_TON_Q_SERVER && npm update && npm install && npm audit fix && cd ..
+cd $DIR_TON_Q_SERVER && npm ci && npm run tsc && npm ci --production && npm audit fix && cd ..
 
 ##########################################
 
